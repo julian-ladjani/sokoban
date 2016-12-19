@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Mar Dec 20 00:34:47 2016 Julian Ladjani
+** Last update Mar Dec 20 00:49:51 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -27,6 +27,8 @@ void		my_sokoban(t_game game)
 	game = move_right(game);
       else if (ch == KEY_RESIZE)
 	game = check_term(game);
+      else if (ch == ' ')
+	game = reset_game(game);
       if (game.win < 0)
 	exit(1);
       else if (game.win > 0)
