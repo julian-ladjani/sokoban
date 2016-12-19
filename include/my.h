@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Mon Nov 28 16:12:40 2016 julian ladjani
-** Last update Feb Dec 19 20:52:33 2016 Julian Ladjani
+** Last update Mar Dec 20 00:33:32 2016 Julian Ladjani
 */
 
 #ifndef MY_H_
@@ -66,6 +66,10 @@ t_game		move_up(t_game game);
 t_game		move_down(t_game game);
 t_game		move_left(t_game game);
 t_game		move_right(t_game game);
+t_game		move_box_left(t_game game);
+t_game		move_box_right(t_game game);
+t_game		move_box_up(t_game game);
+t_game		move_box_down(t_game game);
 
 
 #endif /* !MY_H_ */

@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Mar Dec 20 00:06:37 2016 Julian Ladjani
+** Last update Mar Dec 20 00:34:47 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -40,12 +40,27 @@ t_game		move_up(t_game game)
 {
   char		temp;
 
-  if (game.posy > 0 && game.map[game.posy - 1][game.posx] != '#')
+  if (game.posy > 0)
     {
-      temp = game.map[game.posy][game.posx];
-      game.map[game.posy][game.posx] = game.map[game.posy - 1][game.posx];
-      game.map[game.posy - 1][game.posx] = temp;
-      game.posy--;
+      if (game.map[game.posy - 1][game.posx] == 'O')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy - 1][game.posx] = temp;
+	  game.posy--;
+	}
+      else if (game.map[game.posy - 1][game.posx] == ' ')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  if (game.mapbase[game.posy][game.posx] == 'O')
+	    game.map[game.posy][game.posx] = 'O';
+	  else
+	    game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy - 1][game.posx] = temp;
+	  game.posy--;
+	}
+      else if (game.map[game.posy - 1][game.posx] == 'X')
+	game = move_box_up(game);
     }
   return (game);
 }
@@ -54,13 +69,27 @@ t_game		move_down(t_game game)
 {
   char		temp;
 
-  if (game.map[game.posy + 1] != NULL &&
-      game.map[game.posy + 1][game.posx] != '#')
+  if (game.map[game.posy + 1] != NULL)
     {
-      temp = game.map[game.posy][game.posx];
-      game.map[game.posy][game.posx] = game.map[game.posy + 1][game.posx];
-      game.map[game.posy + 1][game.posx] = temp;
-      game.posy++;
+      if (game.map[game.posy + 1][game.posx] == 'O')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy + 1][game.posx] = temp;
+	  game.posy++;
+	}
+      else if (game.map[game.posy + 1][game.posx] == ' ')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  if (game.mapbase[game.posy][game.posx] == 'O')
+	    game.map[game.posy][game.posx] = 'O';
+	  else
+	    game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy + 1][game.posx] = temp;
+	  game.posy++;
+	}
+      else if (game.map[game.posy + 1][game.posx] == 'X')
+	game = move_box_down(game);
     }
   return (game);
 }
@@ -76,6 +105,7 @@ t_game		move_left(t_game game)
 	  temp = game.map[game.posy][game.posx];
 	  game.map[game.posy][game.posx] = ' ';
 	  game.map[game.posy][game.posx - 1] = temp;
+	  game.posx--;
 	}
       else if (game.map[game.posy][game.posx - 1] == ' ')
 	{
@@ -85,8 +115,10 @@ t_game		move_left(t_game game)
 	  else
 	    game.map[game.posy][game.posx] = ' ';
 	  game.map[game.posy][game.posx - 1] = temp;
+	  game.posx--;
 	}
-      game.posx--;
+      else if (game.map[game.posy][game.posx - 1] == 'X')
+	game = move_box_left(game);
     }
   return (game);
 }
@@ -102,6 +134,7 @@ t_game		move_right(t_game game)
 	  temp = game.map[game.posy][game.posx];
 	  game.map[game.posy][game.posx] = ' ';
 	  game.map[game.posy][game.posx + 1] = temp;
+	  game.posx++;
 	}
       else if (game.map[game.posy][game.posx + 1] == ' ')
 	{
@@ -111,8 +144,10 @@ t_game		move_right(t_game game)
           else
 	    game.map[game.posy][game.posx] = ' ';
 	  game.map[game.posy][game.posx + 1] = temp;
+	  game.posx++;
 	}
-      game.posx++;
+      else if (game.map[game.posy][game.posx + 1] == 'X')
+	game = move_box_right(game);
     }
   return (game);
 }
