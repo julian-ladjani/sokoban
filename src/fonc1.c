@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Feb Dec 19 20:43:15 2016 Julian Ladjani
+** Last update Mar Dec 20 00:06:37 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -38,20 +38,81 @@ void		my_sokoban(t_game game)
 
 t_game		move_up(t_game game)
 {
+  char		temp;
+
+  if (game.posy > 0 && game.map[game.posy - 1][game.posx] != '#')
+    {
+      temp = game.map[game.posy][game.posx];
+      game.map[game.posy][game.posx] = game.map[game.posy - 1][game.posx];
+      game.map[game.posy - 1][game.posx] = temp;
+      game.posy--;
+    }
   return (game);
 }
 
 t_game		move_down(t_game game)
 {
+  char		temp;
+
+  if (game.map[game.posy + 1] != NULL &&
+      game.map[game.posy + 1][game.posx] != '#')
+    {
+      temp = game.map[game.posy][game.posx];
+      game.map[game.posy][game.posx] = game.map[game.posy + 1][game.posx];
+      game.map[game.posy + 1][game.posx] = temp;
+      game.posy++;
+    }
   return (game);
 }
 
 t_game		move_left(t_game game)
 {
+  char		temp;
+
+  if (game.posx > 0)
+    {
+      if (game.map[game.posy][game.posx - 1] == 'O')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy][game.posx - 1] = temp;
+	}
+      else if (game.map[game.posy][game.posx - 1] == ' ')
+	{
+	  temp = game.map[game.posy][game.posx];
+	  if (game.mapbase[game.posy][game.posx] == 'O')
+	    game.map[game.posy][game.posx] = 'O';
+	  else
+	    game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy][game.posx - 1] = temp;
+	}
+      game.posx--;
+    }
   return (game);
 }
 
 t_game		move_right(t_game game)
 {
+  char		temp;
+
+  if (game.map[game.posy][game.posx + 1] != '\0')
+    {
+      if (game.map[game.posy][game.posx + 1] == 'O')
+      	{
+	  temp = game.map[game.posy][game.posx];
+	  game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy][game.posx + 1] = temp;
+	}
+      else if (game.map[game.posy][game.posx + 1] == ' ')
+	{
+	  temp = game.map[game.posy][game.posx];
+          if (game.mapbase[game.posy][game.posx] == 'O')
+            game.map[game.posy][game.posx] = 'O';
+          else
+	    game.map[game.posy][game.posx] = ' ';
+	  game.map[game.posy][game.posx + 1] = temp;
+	}
+      game.posx++;
+    }
   return (game);
 }

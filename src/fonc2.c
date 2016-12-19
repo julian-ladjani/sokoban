@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 17:40:10 2016 Julian Ladjani
-** Last update Feb Dec 19 20:48:49 2016 Julian Ladjani
+** Last update Feb Dec 19 23:44:25 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -15,11 +15,16 @@ t_game		prepare_my_game(char *path)
   t_game	game;
 
   initscr();
-  game.map = parse_it(path);
-  game.mapbase = parse_it(path);
+  keypad(stdscr, TRUE);
+  noecho();
+  if ((game.map = malloc(100 * sizeof(char *))) == NULL ||
+      (game.mapbase = malloc(100 * sizeof(char *))) == NULL)
+    exit(84);
+  game.map = parse_it(path, game.map);
+  game.mapbase = parse_it(path, game.mapbase);
   game = check_map(game);
   game = map_lenght(game);
-  game.error = check_term(game);
+  game = check_term(game);
   getmaxyx(stdscr, game.trow, game.tcol);
   game.win = 0;
   if (game.nbo == 0)
@@ -35,9 +40,9 @@ t_game		map_lenght(t_game game)
 
   x = 0;
   y = 0;
-  while (map[y] != NULL)
+  while (game.map[y] != NULL)
     {
-      while (map[y][x] != '\0')
+      while (game.map[y][x] != '\0')
 	x++;
       if (x > maxx)
 	maxx = x;
@@ -45,7 +50,7 @@ t_game		map_lenght(t_game game)
       y++;
     }
   game.mapx = maxx;
-  game.mapy = maxy;
+  game.mapy = y;
   return (game);
 }
 
@@ -66,14 +71,17 @@ t_game		check_map(t_game game)
 	    exit(84);
 	  if (game.map[y][x] == 'O')
 	    game.nbo++;
-	  else if (game.map[y][x] == 'P' && (play++) > 0 && (game.x = x) >= 0)
-	    game.y = y;
-	  else if (game.map[y][x] != '#' && game.map[y][x] != ' ' &&
-		   game.map[y][x] != 'X')
-	    exit(84);
+	  else if (game.map[y][x] == 'P')
+	    {
+	      game.posy = y;
+	      game.posx = x;
+	      play++;
+	    }
 	}
       x = -1;
     }
+  if (play == 0)
+    exit(84);
   return (game);
 }
 
@@ -85,17 +93,18 @@ void		print_sokoban(t_game game)
   if (game.error == 0)
     {
       while (game.map[++y] != NULL)
-	mvprintw(0, 0, game.map[y]);
+	mvprintw(y, 0, game.map[y]);
     }
   else
     mvprintw(game.trow/2, (game.tcol - 20)/2, "Enlarge The Terminal");
-  cur_set(0);
+  curs_set(0);
+  refresh();
 }
 
 t_game		check_term(t_game game)
 {
   getmaxyx(stdscr, game.trow, game.tcol);
-  if (game.trow > game.mapy || game.tcol > game.mapx)
+  if (game.trow < game.mapy || game.tcol < game.mapx)
     game.error = 1;
   else
     game.error = 0;

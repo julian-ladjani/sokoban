@@ -5,11 +5,10 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 09:20:19 2016 Julian Ladjani
-** Last update Feb Dec 19 20:42:15 2016 Julian Ladjani
+** Last update Feb Dec 19 21:26:38 2016 Julian Ladjani
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "my.h"
 
 char		**parse_it(char *path, char **map)
 {
@@ -26,11 +25,12 @@ char		**parse_it(char *path, char **map)
     exit(84);
   while ((read = getline(&line, &len, stream)) != -1)
     {
-      if (line[0] != '#' || line[read] != '#' || tab >= 99)
+      if ((line[0] != '#' || line[read - 2] != '#' || tab >= 99) &&
+	  line[0] != '\n')
 	exit(84);
       if ((map[tab] = malloc((read + 1) * sizeof(char *))) == NULL)
 	exit(84);
-      my_strcpy(map[tab], line)
+      my_strcpy(map[tab], line);
       tab++;
     }
   map[tab] = NULL;
