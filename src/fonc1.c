@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Mar Dec 20 19:31:15 2016 Julian Ladjani
+** Last update Mar Dec 20 19:48:45 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -15,7 +15,7 @@ int		my_sokoban(t_game game)
   int		ch;
 
   ch = 0;
-  while (1)
+  while (ch != 27)
     {
       if (ch == KEY_UP)
 	game = move_up(game);
@@ -35,6 +35,7 @@ int		my_sokoban(t_game game)
 	return (game.win);
       ch = getch();
     }
+  return (0);
 }
 
 t_game		move_up(t_game game)

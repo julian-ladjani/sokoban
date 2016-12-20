@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Mar Dec 20 00:41:43 2016 Julian Ladjani
-** Last update Mar Dec 20 19:19:41 2016 Julian Ladjani
+** Last update Mar Dec 20 21:41:48 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -61,14 +61,18 @@ int		check_box(t_game game, int posx, int posy)
   int		block;
 
   block = 0;
-  if (game.map[posy][posx - 1] == 'X' || game.map[posy][posx - 1] == '#')
-    block--;
-  if (game.map[posy][posx + 1] == 'X' || game.map[posy][posx + 1] == '#')
-    block--;
-  if (game.map[posy + 1][posx] == 'X' || game.map[posy + 1][posx] == '#')
-    block--;
-  if (game.map[posy - 1][posx] == 'X' || game.map[posy - 1][posx] == '#')
-    block--;
+  if ((game.map[posy][posx - 1] == 'X' || game.map[posy][posx - 1] == '#') &&
+      (game.map[posy + 1][posx] == 'X' || game.map[posy + 1][posx] == '#'))
+    block = -2;
+  if ((game.map[posy][posx + 1] == 'X' || game.map[posy][posx + 1] == '#') &&
+      (game.map[posy + 1][posx] == 'X' || game.map[posy + 1][posx] == '#'))
+    block = -2;
+  if ((game.map[posy][posx + 1] == 'X' || game.map[posy][posx + 1] == '#') &&
+      (game.map[posy - 1][posx] == 'X' || game.map[posy - 1][posx] == '#'))
+    block = -2;
+  if ((game.map[posy][posx - 1] == 'X' || game.map[posy][posx - 1] == '#') &&
+      (game.map[posy - 1][posx] == 'X' || game.map[posy - 1][posx] == '#'))
+    block = -2;
   if (block > -2)
     block = 0;
   return (block);
