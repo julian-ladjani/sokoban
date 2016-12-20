@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Mar Dec 20 19:01:12 2016 Julian Ladjani
+** Last update Mar Dec 20 19:31:15 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -30,9 +30,9 @@ int		my_sokoban(t_game game)
       else if (ch == ' ')
 	game = reset_game(game);
       game.win = check_win(game);
+      print_sokoban(game);
       if (game.win != 0)
 	return (game.win);
-      print_sokoban(game);
       ch = getch();
     }
 }
