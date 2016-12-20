@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Mar Dec 20 00:41:43 2016 Julian Ladjani
-** Last update Mar Dec 20 18:59:02 2016 Julian Ladjani
+** Last update Mar Dec 20 19:19:41 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -62,14 +62,38 @@ int		check_box(t_game game, int posx, int posy)
 
   block = 0;
   if (game.map[posy][posx - 1] == 'X' || game.map[posy][posx - 1] == '#')
-    block++;
+    block--;
   if (game.map[posy][posx + 1] == 'X' || game.map[posy][posx + 1] == '#')
-    block++;
+    block--;
   if (game.map[posy + 1][posx] == 'X' || game.map[posy + 1][posx] == '#')
-    block++;
+    block--;
   if (game.map[posy - 1][posx] == 'X' || game.map[posy - 1][posx] == '#')
-    block++;
-  if (block < 2)
+    block--;
+  if (block > -2)
     block = 0;
   return (block);
+}
+
+t_game		check_map_loop(t_game game, int y)
+{
+  int		x;
+
+  x = -1;
+  while (game.map[y][++x] != '\0')
+    {
+      if (game.play > 1)
+	exit(84);
+      if (game.map[y][x] == 'O')
+	game.nbo++;
+      else if (game.map[y][x] == 'P')
+	{
+	  game.posy = y;
+	  game.posx = x;
+	  game.play++;
+	}
+      else if (game.map[y][x] != ' ' && game.map[y][x] != '\n' &&
+	       game.map[y][x] != 'X' && game.map[y][x] != '#')
+	exit(84);
+    }
+  return (game);
 }

@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 09:20:19 2016 Julian Ladjani
-** Last update Feb Dec 19 21:26:38 2016 Julian Ladjani
+** Last update Mar Dec 20 19:11:46 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -42,10 +42,16 @@ char		**parse_it(char *path, char **map)
 int		main(int ac, char **av)
 {
   t_game	game;
+  int		win;
 
   if (ac < 2)
     exit(84);
   game = prepare_my_game(av[1]);
-  my_sokoban(game);
+  win = my_sokoban(game);
+  endwin();
+  if (win < 0)
+    return (1);
+  else if (win > 0)
+    return (0);
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 17:40:10 2016 Julian Ladjani
-** Last update Mar Dec 20 18:47:54 2016 Julian Ladjani
+** Last update Mar Dec 20 19:19:27 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -58,30 +58,16 @@ t_game		check_map(t_game game)
 {
   int		x;
   int		y;
-  int		play;
 
   x = -1;
   y = -1;
-  play = 0;
+  game.play = 0;
   game.nbo = 0;
   while (game.map[++y] != NULL)
     {
-      while (game.map[y][++x] != '\0')
-	{
-	  if (play > 1)
-	    exit(84);
-	  if (game.map[y][x] == 'O')
-	    game.nbo++;
-	  else if (game.map[y][x] == 'P')
-	    {
-	      game.posy = y;
-	      game.posx = x;
-	      play++;
-	    }
-	}
-      x = -1;
+      game = check_map_loop(game, y);
     }
-  if (play == 0)
+  if (game.play == 0)
     exit(84);
   return (game);
 }
