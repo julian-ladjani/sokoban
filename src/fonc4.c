@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Mar Dec 20 00:41:43 2016 Julian Ladjani
-** Last update Mar Dec 20 00:50:06 2016 Julian Ladjani
+** Last update Mar Dec 20 17:34:26 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -28,4 +28,9 @@ t_game		reset_game(t_game game)
   if (game.nbo == 0)
     exit(0);
   return (game);
+}
+
+int		check_win(t_game game)
+{
+  
 }

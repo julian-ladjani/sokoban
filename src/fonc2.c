@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 17:40:10 2016 Julian Ladjani
-** Last update Mar Dec 20 00:41:53 2016 Julian Ladjani
+** Last update Mar Dec 20 11:49:18 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -96,7 +96,10 @@ void		print_sokoban(t_game game)
 	mvprintw(y, 0, game.map[y]);
     }
   else
-    mvprintw(game.trow/2, (game.tcol - 20)/2, "Enlarge The Terminal");
+    {
+      clear();
+      mvprintw(game.trow / 2, (game.tcol - 20) / 2, "Enlarge The Terminal");
+    }
   curs_set(0);
   refresh();
 }
