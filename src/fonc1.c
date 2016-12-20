@@ -5,12 +5,12 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 16:11:32 2016 Julian Ladjani
-** Last update Mar Dec 20 00:49:51 2016 Julian Ladjani
+** Last update Mar Dec 20 19:01:12 2016 Julian Ladjani
 */
 
 #include "my.h"
 
-void		my_sokoban(t_game game)
+int		my_sokoban(t_game game)
 {
   int		ch;
 
@@ -29,10 +29,9 @@ void		my_sokoban(t_game game)
 	game = check_term(game);
       else if (ch == ' ')
 	game = reset_game(game);
-      if (game.win < 0)
-	exit(1);
-      else if (game.win > 0)
-	exit(0);
+      game.win = check_win(game);
+      if (game.win != 0)
+	return (game.win);
       print_sokoban(game);
       ch = getch();
     }

@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Feb Dec 19 17:40:10 2016 Julian Ladjani
-** Last update Mar Dec 20 11:49:18 2016 Julian Ladjani
+** Last update Mar Dec 20 18:47:54 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -63,6 +63,7 @@ t_game		check_map(t_game game)
   x = -1;
   y = -1;
   play = 0;
+  game.nbo = 0;
   while (game.map[++y] != NULL)
     {
       while (game.map[y][++x] != '\0')

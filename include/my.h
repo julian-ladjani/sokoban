@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Mon Nov 28 16:12:40 2016 julian ladjani
-** Last update Mar Dec 20 00:46:00 2016 Julian Ladjani
+** Last update Mar Dec 20 19:01:34 2016 Julian Ladjani
 */
 
 #ifndef MY_H_
@@ -43,8 +43,9 @@ void		my_putstr(char *str);
 void		my_putstr_error(char *str);
 void		my_putchar(char c);
 void		print_sokoban(t_game game);
-void		my_sokoban(t_game game);
 
+int			my_sokoban(t_game game);
+int		check_win(t_game game);
 int		my_strlen(char *str);
 int		main(int ac, char **av);
 int		flag_search_ls(char c);
@@ -52,6 +53,7 @@ int		my_printf(char *str, ...);
 int		my_strcmp(char *str1, char *str2);
 int		my_comp_alf(char *s1, char *s2);
 int		my_strlen(char *str);
+int		check_box(t_game game, int posx, int posy);
 
 char		*my_strcpy(char *dest, char *src);
 char		*my_strcat(char *dest, char *src);

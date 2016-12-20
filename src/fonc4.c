@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Mar Dec 20 00:41:43 2016 Julian Ladjani
-** Last update Mar Dec 20 17:34:26 2016 Julian Ladjani
+** Last update Mar Dec 20 18:59:02 2016 Julian Ladjani
 */
 
 #include "my.h"
@@ -32,5 +32,44 @@ t_game		reset_game(t_game game)
 
 int		check_win(t_game game)
 {
-  
+  int		x;
+  int		y;
+
+  x = 0;
+  y = 0;
+  if (game.nbo == 0)
+    {
+      game.win = 1;
+      return (game.win);
+    }
+  while (game.map[y] != NULL)
+    {
+      while (game.map[y][x] != '\0')
+	{
+	  if (game.map[y][x] == 'X' && (game.win = check_box(game, x, y)) == 0)
+	    return (game.win);
+	  x++;
+	}
+      y++;
+      x = 0;
+    }
+  return (game.win);
+}
+
+int		check_box(t_game game, int posx, int posy)
+{
+  int		block;
+
+  block = 0;
+  if (game.map[posy][posx - 1] == 'X' || game.map[posy][posx - 1] == '#')
+    block++;
+  if (game.map[posy][posx + 1] == 'X' || game.map[posy][posx + 1] == '#')
+    block++;
+  if (game.map[posy + 1][posx] == 'X' || game.map[posy + 1][posx] == '#')
+    block++;
+  if (game.map[posy - 1][posx] == 'X' || game.map[posy - 1][posx] == '#')
+    block++;
+  if (block < 2)
+    block = 0;
+  return (block);
 }
